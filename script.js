@@ -140,12 +140,3 @@ musicToggleBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
 });
-
-const email = "madhavans2305@gmail.com";
-const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-const link = isMobile
-    ? `mailto:${email}`
-    : `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
-
-document.getElementById("emailLink").href = link;   
