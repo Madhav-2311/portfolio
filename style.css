@@ -591,3 +591,88 @@ footer {
         font-size: 1rem;
     }
 }
+/*
+ The JavaScript code that was mistakenly placed here has been moved
+ into a separate script file. This file now contains only CSS rules.
+*/
+
+* ,
+*::after,
+*::before {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+/* basic custom cursor animation styles */
+body {
+  cursor: none;
+}
+
+#cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  transition: background 0.2s;
+  mix-blend-mode: difference;
+  z-index: 9999;
+}
+
+/* scale/flash animation triggered when the cursor moves */
+#cursor.move {
+  animation: cursor-move 0.4s ease-out;
+}
+
+@keyframes cursor-move {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* optional afterglow/trail effect by using box-shadow */
+#cursor.trail {
+  box-shadow: 0 0 8px 4px rgba(255,255,255,0.5);
+}
+
+/* sparkle effect left behind on movement */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  animation: sparkle-anim 0.6s ease-out forwards;
+  mix-blend-mode: difference;
+  z-index: 9998;
+}
+
+@keyframes sparkle-anim {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(2) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(90deg);
+  }
+}

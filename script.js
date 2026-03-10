@@ -140,3 +140,42 @@ musicToggleBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
 });
+// simple cursor follower
+window.addEventListener('DOMContentLoaded', () => {
+  // allow CSS animations to start
+  document.body.classList.remove('not-loaded');
+
+  // create a simple circle that follows the cursor
+  const cursor = document.createElement('div');
+  cursor.id = 'cursor';
+  document.body.appendChild(cursor);
+
+  let moving = false;
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+    // trigger a brief scale/opacity animation
+    if (!moving) {
+      moving = true;
+      cursor.classList.add('move');
+      cursor.classList.add('trail');
+      cursor.addEventListener('animationend', () => {
+        cursor.classList.remove('move');
+        // keep trail for a moment then fade
+        setTimeout(() => cursor.classList.remove('trail'), 100);
+        moving = false;
+      }, { once: true });
+    }
+
+    // create a temporary sparkle element
+    const spark = document.createElement('div');
+    spark.className = 'sparkle';
+    spark.style.left = e.clientX + 'px';
+    spark.style.top = e.clientY + 'px';
+    // random pastel color
+    spark.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
+    document.body.appendChild(spark);
+    spark.addEventListener('animationend', () => spark.remove());
+  });
+});
